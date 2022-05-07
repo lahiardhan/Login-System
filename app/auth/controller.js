@@ -24,10 +24,12 @@ module.exports =  {
       const {username,email, password, password2} = req.body;
          let errors = [];
          console.log(' Username ' + username+ ' email :' + email+ ' pass:' + password);
+         
+         //check if all input fields has filled 
          if(!username || !email || !password || !password2) {
             errors.push({msg : "Please fill in all fields"})
          }
-         //check if match
+         //check if password match
          if(password !== password2) {
             errors.push({msg : "passwords doesn't match"});
          }
