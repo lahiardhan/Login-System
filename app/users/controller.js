@@ -7,4 +7,14 @@ module.exports = {
       }
    },
 
+   dashboard: async(req, res) => {
+      try {
+         res.render('dashboard',{
+            user: req.user
+         });
+      } catch (err) {
+         console.log(err);
+      }
+   },
+
 }
