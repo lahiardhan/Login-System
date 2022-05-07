@@ -1,5 +1,6 @@
 const User = require('../users/model');
 const bcrypt = require('bcryptjs');
+const passport = require('passport');
 
 module.exports =  {
    viewLogin: async(req, res) => {
@@ -10,7 +11,13 @@ module.exports =  {
       }
    },
 
-   actionLogin: async(req, res) => {},
+   actionLogin: async(req, res, next) => {
+      passport.authenticate('local',{
+         successRedirect : '/dashboard',
+         failureRedirect : '/auth/login',
+         failureFlash : true,
+      })(req,res,next);
+   },
 
    viewSignUp: async(req, res) => {
       try {
@@ -85,5 +92,9 @@ module.exports =  {
          }    
    },
    
-   logOut: async(req, res) => {},
+   logOut: async(req, res) => {
+      req.logout();
+      req.flash('success_msg','Now logged out');
+      res.redirect('/auth/login');
+   },
 }
