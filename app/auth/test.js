@@ -1,32 +1,11 @@
-const User = require("../users/model");
-const bcrypt = require("bcryptjs");
-const passport = require("passport");
+const User = require('../users/model');
+const bcrypt = require('bcryptjs');
+const passport = require('passport');
 
 module.exports = {
-	viewLogin: async (req, res) => {
-		try {
-			res.render("login", {
-            title: 'Login',
-            message: req.flash('alertMessage'),
-            status: req.flash('alertStatus')
-         });
-		} catch (err) {
-			console.log(err);
-		}
-	},
-
-	actionLogin: async (req, res, next) => {
-		passport.authenticate("local", {
-			successRedirect: "/dashboard",
-			failureRedirect: "/auth/login",
-			failureFlash: true,
-		})(req, res, next);
-	},
-
-	viewSignUp: async(req, res) => {
+   viewSignUp: async(req, res) => {
       try {
          res.render('signup', {
-            title: 'Sign Up',
             message: req.flash('alertMessage'),
             status: req.flash('alertStatus')
          });
@@ -53,9 +32,4 @@ module.exports = {
          res.redirect('/auth/signup');
       }
    },
-	logOut: async (req, res) => {
-		req.logout();
-		req.flash("success_msg", "Now logged out");
-		res.redirect("/auth/login");
-	},
-};
+}
