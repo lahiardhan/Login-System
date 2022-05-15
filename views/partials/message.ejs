@@ -19,9 +19,9 @@
 <% if (message != "") {%>
    <div class="alert alert-<%= status %> alert-dismissible">
       <% if (status == "success") { %>
-         <h5><%= message %></h5>
+         <h5 style="color: lawngreen;"><%= message %></h5>
       <% } else { %>
-         <h5><%= message %></h5>
+         <h5 style="color: red;"><%= message %></h5>
       <% } %>
    </div>
 <% } %>
