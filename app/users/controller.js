@@ -7,7 +7,9 @@ module.exports = {
             status: req.flash('alertStatus')
          });
       } catch (err) {
-         console.log(err);
+         req.flash('alertMessage', `${err.message}`);
+         req.flash('alertStatus', 'danger');
+         res.redirect('/');
       }
    },
 
@@ -20,7 +22,9 @@ module.exports = {
             status: req.flash('alertStatus')
          });
       } catch (err) {
-         console.log(err);
+         req.flash('alertMessage', `${err.message}`);
+         req.flash('alertStatus', 'danger');
+         res.redirect('/dashboard');
       }
    },
 
