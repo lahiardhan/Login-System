@@ -91,7 +91,8 @@ module.exports = {
                               // save user
                               newUser.save().then((value) => {
                                  console.log(value);
-                                 req.flash('success_msg', 'You have now registered!');
+                                 req.flash('alertMessage', 'You have now registered!');
+                                 req.flash('alertStatus', 'success')
                                  res.redirect('/auth/login');
                               })
                               .catch(value=> console.log(value));
@@ -108,9 +109,64 @@ module.exports = {
          res.redirect('/auth/signup');
       }
    },
+
+   viewForgot: async (req, res) => {
+		try {
+			res.render("forgot", {
+            title: 'Change Password',
+            message: req.flash('alertMessage'),
+            status: req.flash('alertStatus')
+         });
+		} catch (err) {
+			console.log(err);
+		}
+	},
+
+	actionForgot: async (req, res, next) => {
+      try {
+         const { username, email, password } = req.body;
+
+         const user = await User.findOne({ username: username });
+
+         if(user){
+            if(user.email == email) {
+               const updated = ({password})
+               bcrypt.genSalt(10, (err, salt) => {
+                  bcrypt.hash(updated.password, salt, (err, hash) => {
+                     if(err) throw(err);
+                     // save pass to hash
+                     updated.password = hash;
+                     User.findOneAndUpdate({username: username}, {password: updated.password}).then(() => {
+                        console.log(user);
+                        req.flash('alertMessage','Password Successfully Changed!');
+                        req.flash('alertStatus', 'success');
+                        res.redirect('/auth/login');
+                     })
+                  })
+               })
+
+            } else {
+               req.flash('alertMessage','Email incorrect!');
+               req.flash('alertStatus', 'danger');
+               res.redirect('/auth/forgot');
+            }
+         }
+         else{
+            req.flash('alertMessage','User not found!');
+            req.flash('alertStatus', 'danger');
+            res.redirect('/auth/forgot');
+         }
+      } catch (err) {
+         req.flash('alertMessage', `${err.message}`);
+         req.flash('alertStatus', 'danger');
+         res.redirect('/auth/login');
+      }
+	},
+
 	logOut: async (req, res) => {
 		req.logout();
-		req.flash("success_msg", "Now logged out");
+		req.flash("alertMessage", "Successfully logged out!");
+		req.flash("alertStatus", "success");
 		res.redirect("/auth/login");
 	},
 };
