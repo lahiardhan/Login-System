@@ -1,0 +1,30 @@
+<%- include ./partials/header.ejs %>
+   <div class="row">
+      <div class="col-md-5">
+         <h1>Change My Password</h1>
+         <%- include ./partials/message.ejs %>
+         <form action="/auth/forgot" method="POST">
+            <div class="mb-3">
+               <label class="form-label" for="username">Username</label>
+               <input type="text" name="username" class="form-control" placeholder="Enter Username" />
+            </div>
+            <div class="mb-3">
+               <label class="form-label" for="email">Email</label>
+               <input type="email" name="email" class="form-control" placeholder="youremail@mail.com" />
+            </div>
+            <div class="mb-3">
+               <label class="form-label" for="password">New Password</label>
+               <input
+                  type="password"
+                  name="password"
+                  class="form-control"
+                  placeholder="Enter Password"
+               />
+            </div>
+            <div class="d-grid gap-2 mb-3">
+               <button class="btn btn-dark" type="submit">Change Password</button>
+            </div>
+         </form>
+      </div>
+   </div>
+<%- include ./partials/footer.ejs %>
