@@ -1,5 +1,7 @@
 # Login System with Express JS
 
+This login system was for server side application, styling layout with custom Bootstrap 5.
+
 Reference : https://betterprogramming.pub/build-a-login-system-in-node-js-f1ba2abd19a
 
 Required Package :
