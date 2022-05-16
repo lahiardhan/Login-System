@@ -1,27 +1,14 @@
-<% if(typeof errors!= 'undefined') { %>
-   <%    errors.forEach(function(error){ %>
-   <p style="color: red;"> <%= error.msg %></p>
-   <%    })        %>
-<% } %>
-
-<% if(success_msg!= '') { %>
-   <p style="color: lawngreen;"><%=success_msg %> </p>
-<% } %>
-
 <% if(error_msg != '') { %>
    <p style="color: red;"> <%= error_msg %></p>
 <% } %> 
+
 <% if(error != '') { %>
    <p style="color: red;"> <%= error %></p>
 <% } %>
 
-
 <% if (message != "") {%>
-   <div class="alert alert-<%= status %> alert-dismissible">
-      <% if (status == "success") { %>
-         <h5 style="color: lawngreen;"><%= message %></h5>
-      <% } else { %>
-         <h5 style="color: red;"><%= message %></h5>
-      <% } %>
+   <div class="alert alert-<%= status %> alert-dismissible fade show text-light" role="alert">
+      <%= message %>
+      <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert" aria-label="Close"></button>
    </div>
 <% } %>
